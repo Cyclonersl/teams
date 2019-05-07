@@ -1,10 +1,10 @@
-const teams = (state = [], action) => {
+import normalizedStateArray from '../util'
+import normalizedStateArrayAdd from '../util'
+
+const teams = (state = normalizedStateArray, action) => {
     switch (action.type) {
         case 'ADD_TEAM':
-            return [
-                ...state,
-                action.team
-            ]
+            return normalizedStateArrayAdd(state, action)
         default:
             return state
     }

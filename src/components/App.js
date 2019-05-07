@@ -1,15 +1,13 @@
-import { connect } from 'react-redux'
 import React from 'react';
 import './App.css';
-import '../containers/ControlTeamList'
-import ControlTeamList from '../containers/ControlTeamList';
+import TeamList from './TeamList';
 
-const App = ({dispatch}) => {
+const App = () => {
   return (
     <div className="App">
-      <ControlTeamList/>
+      <TeamList/>
     </div>
   )
 }
 
-export default connect()(App);
+export default App;

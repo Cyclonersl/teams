@@ -1,27 +1,38 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import { addTeam } from '../store/action/team'
 import Team from './Team'
 
 
-const TeamList = ({teams, addTeam}) => {
+class TeamList extends Component {
     
-    console.log(teams)
-    console.log(addTeam)
-    return  <div>        
-        <form onSubmit={e => {
-        e.preventDefault()
-        addTeam('Teste')
-      }}>
-        <input type="submit" value="Adicionar"/>
-      </form>
+    render() {
+      console.log(this.props)
+    return (<div>        
+              <form onSubmit={e => {
+                              e.preventDefault()
+                              this.props.addTeam('Teste')
+              }}>
+                <input type="submit" value="Adicionar"/>
+              </form>
 
 
-        {teams.map(team =>
-            <Team 
-            key={team.id}      
-            {...team}
-            />
-        )}
-    </div>
+              {this.props.teams.map(team =>
+                  <Team key={team.id} {...team}/>
+              )}
+            </div>)
+        }
 }
 
-export default TeamList
+const mapStateToProps = state => {
+  return { teams: state.teamsReducer.teams }
+}
+const mapDispatchToProps = dispatch => ({
+   addTeam: name => dispatch(addTeam(name))
+})
+
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(TeamList)
