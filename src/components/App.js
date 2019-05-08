@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TeamList from './TeamList';
+import TeamList from '../containers/TeamList';
 
 const App = () => {
   return (

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import teams from './teams'
+import teamsReducer from './teamsReducer'
+import scheduledServicesReducer from './scheduledServicesReducer'
 
 export default combineReducers ({
-    teamsReducer: teams
+    teamsReducer,
+    scheduledServicesReducer
 })

@@ -1,24 +1,23 @@
-const normalizedStateArray = {
+export const normalizedStateArray = {
     allIds : [],
     byId: {}
 }
 
-const normalizedStateArrayAdd = (state, action) => {
+export const normalizedStateArrayAdd = (state, action) => {
     return {
-        allIds: [ ...state.allIds, action.id ],
-                byId: {
-                    ...state.byId,
-                    [action.id]: action.payload
-                }
+        allIds: state.allIds.concat(action.id),
+        byId: {
+                ...state.byId,
+                [action.id]: action.payload
+              }
     }
 }
 
-const normalizedStateArrayRem = (state, action) => {
-    return {
-        allIds: [...state.allIds.filter(id => id != action.id)],
-                byId: {
-                    ...state.byId,
-                    [action.id]: action.payload
-                }
-    }
+export const normalizedStateArrayRem = (state, action) => {
+    const byId = {...state.byId};
+    delete byId[action.id]    
+    return {        
+        allIds: state.allIds.filter(id => id !== action.id),
+        byId
+    } 
 }
