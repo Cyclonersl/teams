@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes'
+
 export const addTeam = team => {       
     if(team.services === undefined)
         team.services = []
@@ -22,5 +23,17 @@ export const addService = (team, service) => {
         type: actionTypes.ADD_TEAM_SERVICE,
         id: team.id,
         payload: service.id
+    }
+}
+
+export const reorderService = (team, oldIndex, newIndex) => {    
+    return {
+        type:
+        actionTypes.REORDER_SERVICE,
+        id: team.id,
+        payload: {
+            oldIndex: oldIndex,
+            newIndex: newIndex
+        }
     }
 }

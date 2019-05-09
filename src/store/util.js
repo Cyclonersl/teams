@@ -4,6 +4,7 @@ export const normalizedStateArray = {
 }
 
 export const normalizedStateArrayAdd = (state, action) => {
+    
     return {
         allIds: state.allIds.concat(action.id),
         byId: {
