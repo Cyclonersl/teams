@@ -1,11 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ScheduledService from "../ScheduleService";
-import * as teamsAction from "../../store/action/teamsAction";
+import { reorderService } from "../../store/ducks/teams";
 
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 const ScheduledServiceList = props => {
+  const servicesInfo = useSelector(state => state.scheduledServices);
+  const dispatch = useDispatch();
+
   const SortableItem = SortableElement(({ value }) => (
     <li>
       <ScheduledService serviceId={value} />
@@ -16,7 +19,7 @@ const ScheduledServiceList = props => {
     return (
       <ul>
         {items.map((value, index) => {
-          if (props.servicesInfo.byId[value].status === "PROGRAMADA") {
+          if (servicesInfo.byId[value].status === "PROGRAMADA") {
             return (
               <SortableItem
                 key={`service[${index}]`}
@@ -37,8 +40,9 @@ const ScheduledServiceList = props => {
   });
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    props.reorderService(props.team, oldIndex, newIndex);
+    dispatch(reorderService(props.team, oldIndex, newIndex));
   };
+
   return (
     <SortableList
       items={props.services}
@@ -48,16 +52,4 @@ const ScheduledServiceList = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return { servicesInfo: state.scheduledServicesReducer };
-};
-
-const mapDispatchToProps = dispatch => ({
-  reorderService: (team, oldIndex, newIndex) =>
-    dispatch(teamsAction.reorderService(team, oldIndex, newIndex))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ScheduledServiceList);
+export default ScheduledServiceList;

@@ -1,8 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ScheduledService = props => {
-  const service = props.services.byId[props.serviceId];
+  const scheduledServices = useSelector(state => state.scheduledServices);
+  const service = scheduledServices.byId[props.serviceId];
   return (
     <div>
       {service.status}
@@ -12,8 +13,4 @@ const ScheduledService = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return { services: state.scheduledServicesReducer };
-};
-
-export default connect(mapStateToProps)(ScheduledService);
+export default ScheduledService;
