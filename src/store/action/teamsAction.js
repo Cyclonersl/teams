@@ -1,39 +1,37 @@
-import * as actionTypes from './actionTypes'
+import * as actionTypes from "./actionTypes";
 
-export const addTeam = team => {       
-    if(team.services === undefined)
-        team.services = []
+export const addTeam = team => {
+  if (team.services === undefined) team.services = [];
 
-    return {
-            type: actionTypes.ADD_TEAM,
-            id: team.id,
-            payload: team
-            }
-}
+  return {
+    type: actionTypes.ADD_TEAM,
+    id: team.id,
+    payload: team
+  };
+};
 
 export const remTeam = team => {
-    return {
-        type: actionTypes.REM_TEAM,
-        id: team.id
-    }
-}
+  return {
+    type: actionTypes.REM_TEAM,
+    id: team.id
+  };
+};
 
 export const addService = (team, service) => {
-    return {
-        type: actionTypes.ADD_TEAM_SERVICE,
-        id: team.id,
-        payload: service.id
-    }
-}
+  return {
+    type: actionTypes.ADD_TEAM_SERVICE,
+    id: team.id,
+    payload: service.id
+  };
+};
 
-export const reorderService = (team, oldIndex, newIndex) => {    
-    return {
-        type:
-        actionTypes.REORDER_SERVICE,
-        id: team.id,
-        payload: {
-            oldIndex: oldIndex,
-            newIndex: newIndex
-        }
+export const reorderService = (team, oldIndex, newIndex) => {
+  return {
+    type: actionTypes.REORDER_SERVICE,
+    id: team.id,
+    payload: {
+      oldIndex: oldIndex,
+      newIndex: newIndex
     }
-}
+  };
+};
